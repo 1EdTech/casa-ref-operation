@@ -3,15 +3,15 @@ require 'casa/operation/translate/base'
 module CASA
   module Operation
     module Translate
-      class AdjIn < Base
+      class AdjOut < Base
 
         def self.factory attributes
 
-          adj_in_translate_strategy = self.new
+          adj_out_translate_strategy = self.new
           attributes.each do |attribute_name, attribute|
-            adj_in_translate_strategy.map attribute.uuid => attribute_name
+            adj_out_translate_strategy.map attribute_name => attribute.uuid
           end
-          adj_in_translate_strategy
+          adj_out_translate_strategy
 
         end
 

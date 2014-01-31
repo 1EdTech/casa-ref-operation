@@ -18,7 +18,31 @@ module CASA
           @mappings.clone
         end
 
-        def execute original_hash
+        def execute payload
+
+          payload_hash = payload.to_hash
+
+          ['use','require'].each do |type|
+
+            if payload_hash['original'].include? type
+              payload_hash['original'][type] = execute_section payload_hash['original'][type]
+            end
+
+            if payload_hash.include? 'journal'
+              payload_hash['journal'].each_index do |idx|
+                if payload_hash['journal'][idx].include? type
+                  payload_hash['journal'][idx][type] = execute_section payload_hash['journal'][idx][type]
+                end
+              end
+            end
+
+          end
+
+          payload_hash
+
+        end
+
+        def execute_section original_hash
           translated_hash = {}
           original_hash.each do |name, value|
             if @mappings.include? name
