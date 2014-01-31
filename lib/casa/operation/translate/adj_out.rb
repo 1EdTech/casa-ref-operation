@@ -1,9 +1,9 @@
-require 'casa/operation/translate/base'
+require 'casa/operation/translate/payload'
 
 module CASA
   module Operation
     module Translate
-      class AdjOut < Base
+      class AdjOut < Payload
 
         def self.factory attributes
 
